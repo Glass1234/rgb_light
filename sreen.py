@@ -1,7 +1,8 @@
-from PIL import ImageGrab
-from numpy import asarray
-
+import mss
+import mss.tools
 from enum import IntEnum
+
+from PIL import ImageGrab
 
 
 class LightingSides(IntEnum):
@@ -31,7 +32,7 @@ def getLEDRange(side: LightingSides, x_count, y_count):
 
         range(led_bottom + led_left + led_top - 1, led_bottom + led_left, -1),
         range(led_bottom - 1, led_zero, -1),
-        range(led_bottom + led_left- 1, led_bottom , -1),
+        range(led_bottom + led_left - 1, led_bottom, -1),
         range(led_bottom + led_left + led_top + led_right - 1, led_bottom + led_left + led_top, -1)
     ]
 
@@ -85,8 +86,7 @@ def divide_pixels_by_width(arr, num_parts):
 
 
 def screen_range(start_x, start_y, end_x, end_y):
-    obl = ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
-    return obl
+    return ImageGrab.grab(bbox=(start_x, start_y, end_x, end_y))
 
 # screenshot = ImageGrab.grab()
 # none_range = 100
